@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -41,9 +41,24 @@ interface NavGroup {
 type NavStructure = (NavItem | NavGroup)[];
 
 export default function Layout({ children, role = "admin" }: LayoutProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [expandedGroups, setExpandedGroups] = useState<string[]>([]);
+  const [sidebarOpen, setSidebarOpen] = useState(() => {
+    const saved = localStorage.getItem("sidebarOpen");
+    return saved !== null ? JSON.parse(saved) : true;
+  });
+  const [expandedGroups, setExpandedGroups] = useState<string[]>(() => {
+    const saved = localStorage.getItem("expandedGroups");
+    return saved !== null ? JSON.parse(saved) : [];
+  });
   const location = useLocation();
+
+  // Persist sidebar state to localStorage
+  useEffect(() => {
+    localStorage.setItem("sidebarOpen", JSON.stringify(sidebarOpen));
+  }, [sidebarOpen]);
+
+  useEffect(() => {
+    localStorage.setItem("expandedGroups", JSON.stringify(expandedGroups));
+  }, [expandedGroups]);
 
   const isActive = (path: string) => {
     const pathWithoutQuery = path.split("?")[0];
@@ -164,11 +179,9 @@ export default function Layout({ children, role = "admin" }: LayoutProps) {
       <div key={group.label} className="space-y-1">
         <button
           onClick={() => sidebarOpen && toggleGroup(group.label)}
-          className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg transition-colors ${
-            hasActiveItem ? "text-sidebar-primary-foreground" : "text-sidebar-foreground"
-          } ${sidebarOpen ? "hover:bg-sidebar-accent" : ""}`}
+          className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg transition-colors text-sidebar-foreground ${sidebarOpen ? "hover:bg-sidebar-accent" : ""}`}
         >
-          <span className="font-semibold text-xs uppercase tracking-wider opacity-70">
+          <span className={`font-semibold text-xs uppercase tracking-wider ${hasActiveItem ? "opacity-100" : "opacity-70"}`}>
             {sidebarOpen ? group.label : group.label.charAt(0)}
           </span>
           {sidebarOpen && (
