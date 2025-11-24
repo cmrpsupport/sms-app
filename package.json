@@ -11,14 +11,14 @@
     ]
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "npx vite",
     "build": "npm run build:client && npm run build:server",
-    "build:client": "vite build",
-    "build:server": "vite build --config vite.config.server.ts",
+    "build:client": "npx vite build",
+    "build:server": "npx vite build --config vite.config.server.ts",
     "start": "node dist/server/node-build.mjs",
-    "test": "vitest --run",
-    "format.fix": "prettier --write .",
-    "typecheck": "tsc"
+    "test": "npx vitest --run",
+    "format.fix": "npx prettier --write .",
+    "typecheck": "npx tsc"
   },
   "dependencies": {
     "@fontsource/noto-sans": "^5.2.10",
@@ -26,6 +26,8 @@
     "dotenv": "^17.2.1",
     "esbuild": "^0.27.0",
     "express": "^5.1.0",
+    "typescript": "^5.8.3",
+    "vite": "^7.1.2",
     "file-saver": "^2.0.5",
     "jspdf": "^3.0.4",
     "jspdf-autotable": "^5.0.2",
