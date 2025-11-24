@@ -1,0 +1,178 @@
+/** @import must precede all other statements */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Professional Education System Theme
+   * Tailwind CSS theme - HSL values for compatibility with tailwind.config.ts
+  */
+  :root {
+    /* Light mode - Professional blue-based theme */
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+
+    /* Professional Blue Primary */
+    --primary: 217.2 91.2% 59.8%;
+    --primary-50: 218 100% 95%;
+    --primary-100: 216 94% 90%;
+    --primary-200: 215 88% 80%;
+    --primary-300: 214 85% 70%;
+    --primary-400: 213 80% 60%;
+    --primary-500: 212 75% 50%;
+    --primary-600: 217.2 91.2% 59.8%;
+    --primary-700: 215 82% 42%;
+    --primary-900: 217.2 91.2% 30%;
+    --primary-foreground: 210 40% 98%;
+
+    /* Teal Secondary */
+    --secondary: 174 76% 48%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Neutral grays */
+    --muted: 220 13% 91%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    /* Teal Accent */
+    --accent: 174 76% 48%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Destructive Red */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Borders and inputs */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 217.2 91.2% 59.8%;
+
+    --radius: 0.75rem;
+
+    /* Sidebar Navigation */
+    --sidebar-background: 217.2 91.2% 10%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 217.2 91.2% 59.8%;
+    --sidebar-primary-foreground: 217.2 91.2% 10%;
+    --sidebar-accent: 174 76% 48%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 217.2 91.2% 20%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 217.2 91.2% 10%;
+    --foreground: 210 40% 98%;
+
+    --card: 217.2 91.2% 15%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 217.2 91.2% 15%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 217.2 91.2% 10%;
+
+    --secondary: 174 76% 48%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 217.2 91.2% 20%;
+    --muted-foreground: 210 40% 80%;
+
+    --accent: 174 76% 48%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 91.2% 20%;
+    --input: 217.2 91.2% 20%;
+    --ring: 217.2 91.2% 59.8%;
+
+    --sidebar-background: 217.2 91.2% 8%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 217.2 91.2% 59.8%;
+    --sidebar-primary-foreground: 217.2 91.2% 8%;
+    --sidebar-accent: 174 76% 48%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 217.2 91.2% 15%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rounding" 1;
+  }
+
+  :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  pre,
+  code {
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+
+  /* Selection Styling */
+  ::selection {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-card text-card-foreground rounded-lg border border-border p-6;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary-700 transition-colors font-semibold;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 border border-primary text-primary rounded-lg hover:bg-primary-50 transition-colors font-semibold;
+  }
+
+  .badge {
+    @apply inline-block px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-semibold;
+  }
+}
